@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>vichi's primablog</title>
-    </head>
-<body>
-    <p>Hi there! i'm vibashi....</p>
-    <p>It works!for first time</p>
+{% extends 'blog/base.html' %}
 
-    <header>
-        <h1><a href="/">Django Vichi Girls Blog</a></h1>
-    </header>
-
+{% block content %}
     {% for post in posts %}
-    <article>
-        <time>published: {{ post.published_date }}</time>
-        <h2><a href="">{{ post.title }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
-    </article>
-{% endfor %}
-
-        <time>published: 05.08.2024, 12:14</time>
-        <h2><a href="">My second post</a></h2>
-        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-    </article>
-</body>
-</html>
+        <article class="post">
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
